@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/pthread_cond_destroy make run-tests > /dev/ksmg

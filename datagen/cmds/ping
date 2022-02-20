@@ -1,0 +1,1 @@
+ping -W 1 -w 1 -c 1 google.com > /dev/kmsg

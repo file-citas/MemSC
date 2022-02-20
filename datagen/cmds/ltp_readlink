@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s readlink > /dev/ksmg 

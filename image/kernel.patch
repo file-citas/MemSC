@@ -1,0 +1,80 @@
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index ffb181f959d2..795a46eb8b90 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -19,6 +19,7 @@
+ #include <linux/smp.h>
+ #include <linux/io.h>
+ #include <linux/syscore_ops.h>
++#include <asm/syscall.h>
+ 
+ #include <asm/stackprotector.h>
+ #include <asm/perf_event.h>
+@@ -1136,6 +1137,7 @@ void __init early_cpu_init(void)
+ {
+ 	const struct cpu_dev *const *cdev;
+ 	int count = 0;
++	uint64_t off;
+ 
+ #ifdef CONFIG_PROCESSOR_SELECT
+ 	pr_info("KERNEL supported cpus:\n");
+@@ -1163,6 +1165,25 @@ void __init early_cpu_init(void)
+ #endif
+ 	}
+ 	early_identify_cpu(&boot_cpu_data);
++	// XXX
++	// the makereplay script parses some of these
++	off = per_cpu_offset(smp_processor_id());
++	printk(KERN_INFO "SCTABLE--%llx--SCTABLE\n", (uint64_t)sys_call_table);
++	printk(KERN_INFO "SCTABLEPA--%llx--SCTABLEPA\n", (uint64_t)__pa(sys_call_table));
++	printk(KERN_INFO "PCPUOFF--%llx--PERCPUOFF\n", off);
++	//printk(KERN_INFO "PCPUOFF0A--%llx--PERCPUOFF0A\n", (uint64_t)__per_cpu_offset[0]);
++	//printk(KERN_INFO "PCPUOFFA--%llx--PERCPUOFFA\n", (uint64_t)&__per_cpu_offset);
++	//printk(KERN_INFO "CURRENT_TASK PTR: %llx\n", (unsigned long long) per_cpu_ptr_to_phys(&current_task));
++	printk(KERN_INFO "PAGE_OFFSET_BASE--%llx--PAGE_OFFSET_BASE\n", (unsigned long long) &page_offset_base);
++	printk(KERN_INFO "PAGE_OFFSET_BASE0--%llx--PAGE_OFFSET_BASE0\n", (unsigned long long) page_offset_base);
++	printk(KERN_INFO "CURRENT_TASK_PTR--%llx--CURRENT_TASK_PTR\n", (unsigned long long) this_cpu_ptr(&current_task));
++	printk(KERN_INFO "CURRENT_TASK_PA:   %llx\n", (unsigned long long) __pa(this_cpu_ptr(&current_task)));
++	printk(KERN_INFO "CURRENT_TASK:      %llx\n", (unsigned long long) &current_task);
++	printk(KERN_INFO "INIT_TASK PTR:     %llx\n", (unsigned long long) &init_task);
++	printk(KERN_INFO "INIT_TASK PTR CPU: %llx\n", (unsigned long long) get_cpu_var(current_task));
++	printk(KERN_INFO "INIT_TASK PTR MEM: %llx\n", (unsigned long long) *(unsigned long long*)this_cpu_ptr(&current_task));
++	printk(KERN_INFO "CURRENT_TASK PA: %llx\n", (unsigned long long) __pa(&current_task));
++	printk(KERN_INFO "STEXT--%llx--STEXT\n", (unsigned long long) _stext & ~(0xffUL));
+ }
+ 
+ static void detect_null_seg_behavior(struct cpuinfo_x86 *c)
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index d494b9bfe618..e50f7d6a34af 100644
+--- a/arch/x86/kernel/setup.c
++++ b/arch/x86/kernel/setup.c
+@@ -692,7 +692,7 @@ static void __init trim_snb_memory(void)
+ 	 * already been reserved.
+ 	 */
+ 	memblock_reserve(0, 1<<20);
+-	
++
+ 	for (i = 0; i < ARRAY_SIZE(bad_pages); i++) {
+ 		if (memblock_reserve(bad_pages[i], PAGE_SIZE))
+ 			printk(KERN_WARNING "failed to reserve 0x%08lx\n",
+@@ -784,7 +784,7 @@ static void __init trim_low_memory_range(void)
+ {
+ 	memblock_reserve(0, ALIGN(reserve_low, PAGE_SIZE));
+ }
+-	
++
+ /*
+  * Dump out kernel offset information on panic.
+  */
+diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
+index a9134d1910b9..0dc8a03b01f3 100644
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -266,7 +266,6 @@ static void notrace start_secondary(void *unused)
+ 	boot_init_stack_canary();
+ 
+ 	x86_cpuinit.setup_percpu_clockev();
+-
+ 	wmb();
+ 	cpu_startup_entry(CPUHP_AP_ONLINE_IDLE);
+ }

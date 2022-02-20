@@ -1,0 +1,2 @@
+cd /root/posixtestsuite/ && make functional-run > /dev/kmsg
+cd /root/posixtestsuite/ && make run-tests > /dev/kmsg

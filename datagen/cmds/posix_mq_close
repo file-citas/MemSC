@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/mq_close make run-tests > /dev/ksmg

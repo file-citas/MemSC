@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/timer_settime make run-tests > /dev/ksmg

@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/sched_get_priority_min make run-tests > /dev/ksmg

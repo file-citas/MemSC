@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/pthread_condattr_getclock make run-tests > /dev/ksmg

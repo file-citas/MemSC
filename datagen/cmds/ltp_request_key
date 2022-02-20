@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s request_key > /dev/ksmg 

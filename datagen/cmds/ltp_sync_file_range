@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s sync_file_range > /dev/ksmg 

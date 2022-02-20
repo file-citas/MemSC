@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s init_module > /dev/ksmg 

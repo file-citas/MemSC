@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s x32_rt_sigreturn > /dev/ksmg 

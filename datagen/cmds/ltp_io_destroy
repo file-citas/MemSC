@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s io_destroy > /dev/ksmg 

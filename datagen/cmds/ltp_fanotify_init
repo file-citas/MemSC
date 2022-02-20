@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s fanotify_init > /dev/ksmg 

@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s process_vm_readv > /dev/ksmg 

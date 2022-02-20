@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s kexec_file_load > /dev/ksmg 

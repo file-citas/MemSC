@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s migrate_pages > /dev/ksmg 

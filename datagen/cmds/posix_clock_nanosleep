@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/clock_nanosleep make run-tests > /dev/ksmg

@@ -1,0 +1,24 @@
+[QEMU]
+qemu_bin = /home/feli/project/mempat_new/panda/build/x86_64-softmmu/panda-system-x86_64
+qemu_img = /home/feli/project/mempat_new/image/qemu/build/qemu-img
+bzimage = /home/feli/project/mempat_new/image/linux/arch/x86_64/boot/bzImage
+rootfs = /home/feli/project/mempat_new/image/stretch2.img
+rootfs_qcow = /home/feli/project/mempat_new/image/stretch5.qcow2
+osi_kconf_file = /home/feli/project/mempat_new/image/kernelinfo.conf
+osi_kconf_group = stretch420
+rec_dir = /media/feli/NVME1N1/mempat_new/recordings/
+dump_dir = /media/feli/NVME1N1/mempat_new/memaccess_dumps/
+split_dir = /media/feli/SSD2/mempat_new/memaccess_split/
+preproc_dir = /media/feli/NVME1N1/mempat_new/memaccess_preproc/
+syscalls_dir = /media/feli/NVME1N1/mempat_new/memaccess_syscalls/
+
+[MONITOR]
+ip = 127.0.0.1
+listen = 0.0.0.0
+port = 1236
+
+[GUEST]
+ip = localhost
+user = root
+pw = root
+port = 10024

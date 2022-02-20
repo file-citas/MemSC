@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s name_to_handle_at > /dev/ksmg 

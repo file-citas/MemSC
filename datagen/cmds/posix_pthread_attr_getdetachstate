@@ -1,0 +1,1 @@
+cd /root/posixtestsuite/ && POSIX_TARGET=conformance/interfaces/pthread_attr_getdetachstate make run-tests > /dev/ksmg

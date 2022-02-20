@@ -1,0 +1,1 @@
+/opt/ltp/runltp -f syscalls -s ioperm > /dev/ksmg 
