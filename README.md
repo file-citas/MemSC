@@ -13,7 +13,9 @@ git clone https://github.com/torvalds/linux.git
 cd MemSC/image/linux
 git checkout 8fe28cb58bcb
 git apply ../kernel.patch
-make
+cp ../kernel.config .config
+make oldconfig
+make CC=gcc-7
 ```
 
 ## Create Output Directories
@@ -31,8 +33,8 @@ git clone https://github.com/panda-re/panda.git
 cd panda
 git checkout 4ffdb5709b6376a6bc43018ef1a9ad23d53624b5
 git apply ../panda.patch
-make
 ```
+Check panda README for build instructions.
 
 ## Update Configuration
 Replace `<MemSC>` with full path to repo.
