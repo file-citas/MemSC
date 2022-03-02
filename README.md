@@ -3,7 +3,13 @@
 ## Extract Rootfs
 ```
 cd MemSC/image
-tar xf stretch5.qcow2.tar.gz
+./create_image.sh
+sudo mount -o loop <img> <mntpnt>
+sudo tar xf kselftest.tar.gz -C <mntpnt>/root/
+sudo tar xf ltp.tar.gz -C <mntpnt>/root/
+sudo tar xf posiztestsuite.tar.gz -C <mntpnt>/root/
+sudo umount <mntpnt>
+qemu-img convert -O qcow2 <img> <img.qcow2>
 ```
 
 ## Build Guest Kernel
